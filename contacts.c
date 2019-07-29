@@ -51,7 +51,6 @@ void getName(struct Name* name)
 // getAddress:
 void getAddress(struct Address* address)
 {
-	int respond = 0;
 	printf("Please enter the contact's street number: ");
 	address->streetNumber = getInt();
 	
@@ -66,9 +65,8 @@ void getAddress(struct Address* address)
 	clearKeyboard();
 
 	printf("Do you want to enter an apartment number? (y or n): ");
-	respond = yes();
-
-	if (respond == 1)
+	
+	if (yes())
 	{
 		printf("Please enter the contact's apartment number: ");
 		address->apartmentNumber = getInt();
@@ -78,7 +76,6 @@ void getAddress(struct Address* address)
 			printf("*** INVALID APARTMENT NUMBER *** <must be a positive number>: ");
 			address->apartmentNumber = getInt();
 		}
-		respond = 0;
 	}
 
 	printf("Please enter the contact's postal code: ");
@@ -93,32 +90,26 @@ void getAddress(struct Address* address)
 // getNumbers:
 void getNumbers(struct Numbers* numbers)
 {
-	int respond = 0;
-
 	printf("Please enter the contact's cell phone number: ");
 	//scanf("%10[^\n]%*c", numbers->cell);
 	getTenDigitPhone(numbers->cell);
 
 	printf("Do you want to enter a home phone number? (y or n): ");
-	respond = yes();
-
-	if (respond == 1)
+	
+	if (yes())
 	{
 		printf("Please enter the contact's home phone number: ");
 		//scanf("%10[^\n]%*c", numbers->home);
 		getTenDigitPhone(numbers->home);
-		respond = 0;
 	}
 
 	printf("Do you want to enter a business phone number? (y or n): ");
-	respond = yes();
 
-	if (respond == 1)
+	if (yes())
 	{
 		printf("Please enter the contact's business phone number: ");
 		//scanf("%10[^\n]%*c", numbers->business);
 		getTenDigitPhone(numbers->business);
-		respond = 0;
 	}
 }
 

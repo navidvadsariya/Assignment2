@@ -147,81 +147,55 @@ int menu(void)
 void contactManagerSystem(void)
 {
 	int done = 0;
-	int option=0;
-	int response = 0;
-
+	
 	struct Contact contacts[MAXCONTACTS] = { { { "Rick", {'\0'}, "Grimes"},{ 11, "Trailer Park", 0, "A7A 2J2", "King City"},{ "4161112222", "4162223333", "4163334444"} },{ { "Maggie", "R.", "Greene"},{ 55, "Hightop House", 0, "A9A 3K3", "Bolton"},{ "9051112222", "9052223333", "9053334444"} },{ { "Morgan", "A.", "Jones"},{ 77, "Cottage Lane", 0, "C7C 9Q9", "Peterborough"},{ "7051112222", "7052223333", "7053334444"} },{ { "Sasha", {'\0'}, "Williams"},{ 55, "Hightop House", 0, "A9A 3K3", "Bolton"},{ "9052223333", "9052223333", "9054445555"} }, };
 		
 		while (done == 0)
 		{
-			option = menu();
+			int option = menu();
 			
-			if (option == 1 )
-			{
-
-				displayContacts(contacts, MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-				
-			}
-			else if (option == 2)
-			{
-
-				addContact(contacts, MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-				
-			}
-			else if (option == 3)
-			{
-
-				updateContact(contacts,MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-						}
-			else if (option == 4)
-			{
-				deleteContact(contacts, MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-			
-			}
-			else if (option == 5)
-			{
-				searchContacts(contacts,MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-				
-			}
-			else if (option == 6)
-			{
-				sortContacts(contacts, MAXCONTACTS);
-				printf("\n\n");
-				pause();
-				printf("\n");
-				
-			}
-			else if (option == 0)
+			if (option == 0)
 			{
 				printf("\nExit the program? (Y)es/(N)o: ");
-				response = yes();
-				
-				if (response == 1)
+			
+				if (yes())
 				{
 					printf("\nContact Management System: terminated\n");
 					done = 1;
 				}
-				else if (option == 0)
+				else
 				{
 					printf("\n");
-					
 				}
-
+			}
+			else {
+				if (option == 1)
+				{
+					displayContacts(contacts, MAXCONTACTS);
+				}
+				else if (option == 2)
+				{
+					addContact(contacts, MAXCONTACTS);
+				}
+				else if (option == 3)
+				{
+					updateContact(contacts, MAXCONTACTS);
+							}
+				else if (option == 4)
+				{
+					deleteContact(contacts, MAXCONTACTS);
+				}
+				else if (option == 5)
+				{
+					searchContacts(contacts, MAXCONTACTS);
+				}
+				else if (option == 6)
+				{
+					sortContacts(contacts, MAXCONTACTS);
+				}
+				printf("\n\n");
+				pause();
+				printf("\n");
 			}
 		}	
 }
@@ -318,7 +292,6 @@ void displayContacts(const struct Contact contacts[], int size)
 	displayContactHeader();
 	for (i = 0;i < size;i++)
 	{
-		
 		if (atoi(contacts[i].numbers.cell) > 0)
 		{
 			displayContact(&contacts[i]);
@@ -447,7 +420,6 @@ void deleteContact(struct Contact contacts[], int size)
 void sortContacts(struct Contact contacts[], int size)
 {
 	int i, j, m;
-	struct Contact temp;
 
 	for (i = 0; i < size; i++) {
 		m = i;
@@ -457,7 +429,7 @@ void sortContacts(struct Contact contacts[], int size)
 			}
 		}
 		if (m != i) {
-			temp = contacts[i];
+			struct Contact temp = contacts[i];
 			contacts[i] = contacts[m];
 			contacts[m] = temp;
 		}
